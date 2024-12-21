@@ -1,0 +1,45 @@
+plugins {
+    id "com.android.application"
+    id 'com.google.gms.google-services' // Firebase plugin
+    id "kotlin-android"
+    id "dev.flutter.flutter-gradle-plugin"
+}
+
+android {
+    namespace = "com.example.momo_todo_task"
+    
+    // Correctly define compileSdkVersion and targetSdkVersion as properties
+    compileSdkVersion 34  // Update to SDK 34
+
+    defaultConfig {
+        applicationId = "com.example.momo_todo_task"
+
+        // Firebase requires at least minSdkVersion 23
+        minSdkVersion 23  // Keep this at 23
+
+        // Define targetSdkVersion as a property
+        targetSdkVersion 34  // Update to SDK 34
+
+        versionCode flutter.versionCode
+        versionName flutter.versionName
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    buildTypes {
+        release {
+            signingConfig = signingConfigs.debug
+        }
+    }
+}
+
+flutter {
+    source = "../.." // Points to your Flutter source directory
+}

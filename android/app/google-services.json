@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1006456996209",
+    "project_id": "momo-todo-task",
+    "storage_bucket": "momo-todo-task.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1006456996209:android:b695e75fcbe8bcf08136d0",
+        "android_client_info": {
+          "package_name": "com.example.momo_todo_task"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDUQU-dlbgJQpEUwUnTDqRLjWCahg-T_yE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
