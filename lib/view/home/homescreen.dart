@@ -4,7 +4,6 @@ import 'package:momo_todo_task/controller/todo_controller.dart';
 import 'package:momo_todo_task/model/todo_model.dart';
 import 'package:provider/provider.dart';
 
-
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -82,8 +81,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     CircleAvatar(
                       radius: 30,
-                      backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1642886513531-5a1cf3ba164a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1lbiUyMHN1aXR8ZW58MHx8MHx8fDA%3D',
+                      backgroundImage: AssetImage(
+                        'assets/Slavoj-Zizek-1024x585.jpg.webp',
                       ),
                     ),
                     const SizedBox(width: 10),
@@ -118,136 +117,152 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           Expanded(
-            child: GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                crossAxisSpacing: 8,
-                mainAxisSpacing: 8,
-                childAspectRatio: 1.5,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0), 
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 8,
+                  mainAxisSpacing: 8,
+                  childAspectRatio: 1.3,
+                ),
+                itemCount: todoProvider.todos.isEmpty
+                    ? 1
+                    : todoProvider.todos.length + 1,
+                itemBuilder: (context, index) {
+                  if (index == 0) {
+                    return AddTodoCard(themeProvider, todoProvider);
+                  }
+                  final category = todoProvider.todos[index - 1];
+                  return CategoryCard(category, themeProvider);
+                },
               ),
-              itemCount: todoProvider.todos.isEmpty
-                  ? 1
-                  : todoProvider.todos.length + 1,
-              itemBuilder: (context, index) {
-                if (index == 0) {
-                  return Card(
-                    color: themeProvider.backgroundColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 2,
-                    child: Center(
-                      child: IconButton(
-                        onPressed: () {
-                          final TextEditingController titleController =
-                              TextEditingController();
-                          final TextEditingController tasksController =
-                              TextEditingController();
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return AlertDialog(
-                                backgroundColor: themeProvider.backgroundColor,
-                                title: TextField(
-                                  controller: titleController,
-                                  decoration: InputDecoration(
-                                    hintText: 'Title',
-                                    hintStyle: TextStyle(
-                                      color: themeProvider.textColor,
-                                    ),
-                                  ),
-                                ),
-                                content: TextField(
-                                  controller: tasksController,
-                                  decoration: InputDecoration(
-                                    hintText: 'Tasks',
-                                    hintStyle: TextStyle(
-                                      color: themeProvider.textColor,
-                                    ),
-                                  ),
-                                ),
-                                actions: [
-                                  TextButton(
-                                      onPressed: () {
-                                        todoProvider.addTodo(
-                                          Model(
-                                              title: titleController.text,
-                                              tasks: tasksController.text),
-                                        );
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text("Add ")),
-                                  TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                      },
-                                      child: Text('Cancel'))
-                                ],
-                              );
-                            },
-                          );
-                        },
-                        icon: Icon(
-                          Icons.add_circle_rounded,
-                          color: themeProvider.addButtonColor,
-                          size: 50,
-                        ),
-                      ),
-                    ),
-                  );
-                }
-                final category = todoProvider.todos[index - 1];
-                return Card(
-                  color: themeProvider.backgroundColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  elevation: 2,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/addtask');
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            category.title,
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: themeProvider.textColor,
-                            ),
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            category.tasks,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: themeProvider.textColor,
-                            ),
-                          ),
-                          Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.more_vert,
-                                    color: themeProvider.textColor,
-                                  ),
-                                ),
-                              ])
-                        ],
-                      ),
-                    ),
-                  ),
-                );
-              },
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget AddTodoCard(ThemeController themeProvider, TodoProvider todoProvider) {
+    return Card(
+      color: themeProvider.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 2,
+      child: Center(
+        child: IconButton(
+          onPressed: () {
+            final TextEditingController titleController = TextEditingController();
+            final TextEditingController tasksController = TextEditingController();
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  backgroundColor: themeProvider.backgroundColor,
+                  title: TextField(
+                    controller: titleController,
+                    decoration: InputDecoration(
+                      hintText: 'Title',
+                      hintStyle: TextStyle(
+                        color: themeProvider.textColor,
+                      ),
+                    ),
+                  ),
+                  content: TextField(
+                    controller: tasksController,
+                    decoration: InputDecoration(
+                      hintText: 'Tasks',
+                      hintStyle: TextStyle(
+                        color: themeProvider.textColor,
+                      ),
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        if (titleController.text.isNotEmpty &&
+                            tasksController.text.isNotEmpty) {
+                          todoProvider.addTodo(
+                            Model(
+                              title: titleController.text,
+                              tasks: tasksController.text,
+                            ),
+                          );
+                          Navigator.pop(context);
+                        }
+                      },
+                      child: Text("Add"),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text('Cancel'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          icon: Icon(
+            Icons.add_circle_rounded,
+            color: themeProvider.addButtonColor,
+            size: 50,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget CategoryCard(Model category, ThemeController themeProvider) {
+    return Card(
+      color: themeProvider.backgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+      ),
+      elevation: 2,
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, '/addtask');
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                category.title,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: themeProvider.textColor,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                category.tasks,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: themeProvider.textColor,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: Icon(
+                      Icons.more_vert,
+                      color: themeProvider.textColor,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

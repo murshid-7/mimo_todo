@@ -8,41 +8,39 @@ class AddCategory extends StatefulWidget {
 }
 
 class _AddCategoryState extends State<AddCategory> {
-  final List<Map<String, dynamic>> tasks = [
-    {
-      'header': 'Today',
-      'items': [
-        {'title': '10 min Running', 'done': true},
-        {'title': '5 min Rope Skipping', 'done': true}
-      ]
-    },
-    {
-      'header': 'Tomorrow',
-      'items': [
-        {'title': '10 Push ups', 'done': false},
-        {'title': '10 Pull ups', 'done': false},
-        {'title': '20 Squads', 'done': false},
-        {'title': '30 Jump', 'done': false}
-      ]
-    },
-    {
-      'header': 'Fri, Oct 04, 2019',
-      'items': [
-        {'title': 'Lose 20 Kg', 'done': false},
-        {'title': 'Reach 50 Push ups', 'done': false},
-        {'title': 'Reach 15 min Rope Skipping', 'done': false},
-        {'title': 'Reach 100 Squads', 'done': false}
-      ]
-    },
-    {
-      'header': 'Wed, Jan 01, 2020',
-      'items': [
-        {'title': 'Lose 10 Kg', 'done': false},
-        {'title': 'Reach 100 Push ups', 'done': false},
-        {'title': 'Reach 20 min Rope Skipping', 'done': false}
-      ]
-    },
-  ];
+ final List<Map<String, dynamic>> tasks = [
+  {
+    'header': 'Monday',
+    'items': [
+      {'title': 'Morning Yoga', 'done': true},
+      {'title': 'Walk 5 Km', 'done': false}
+    ]
+  },
+  {
+    'header': 'Next Week',
+    'items': [
+      {'title': 'Complete 30 Push-ups', 'done': true},
+      {'title': 'Cycle for 1 hour', 'done': false},
+      {'title': 'Jog for 20 minutes', 'done': false}
+    ]
+  },
+  {
+    'header': 'March 2024 Goals',
+    'items': [
+      {'title': 'Run 10 Km', 'done': false},
+      {'title': 'Complete 100 Push-ups in a row', 'done': false},
+      {'title': 'Attend Yoga Classes thrice a week', 'done': false}
+    ]
+  },
+  {
+    'header': 'Next Month',
+    'items': [
+      {'title': 'Join Gym', 'done': true},
+      {'title': 'Start Swimming', 'done': false},
+      {'title': 'Lose 5 Kg', 'done': false}
+    ]
+  },
+];
 
   @override
   Widget build(BuildContext context) {

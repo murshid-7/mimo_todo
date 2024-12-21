@@ -37,7 +37,7 @@ class SettingsPage extends StatelessWidget {
                   radius: 50,
                   backgroundColor: themeProvider.backgroundColor,
                   backgroundImage: AssetImage(
-                    'https://images.unsplash.com/photo-1642886513531-5a1cf3ba164a?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTl8fG1lbiUyMHN1aXR8ZW58MHx8MHx8fDA%3D',
+                    'assets/photo-1642886513531-5a1cf3ba164a.jpeg',
                   ),
                 ),
                 SizedBox(width: 16),
@@ -96,17 +96,6 @@ class SettingsPage extends StatelessWidget {
               ),
               title: Text(
                 'General',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: themeProvider.textColor,
-                ),
-              ),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.person, color: themeProvider.textColor),
-              title: Text(
-                'Account',
                 style: TextStyle(
                   fontSize: 16,
                   color: themeProvider.textColor,
